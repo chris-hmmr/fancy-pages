@@ -1,25 +1,35 @@
-var calcNums = document.querySelectorAll('.numbtn div');
-for (var i = 0; i < calcNums.length; i++) {
-    calcNums[i].addEventListener("click", function(p) { pushToOutput(p.currentTarget.innerText); });
-}
+const calcNums = document.querySelectorAll('.numbtn div');
+const calcOps = document.querySelectorAll('.opsbtns div');
+const equalsBtn = document.getElementById('equals')
+const resetBtn = document.getElementById('reset')
 
-var calcOps = document.querySelectorAll('.opsbtns div');
-for (var i = 0; i < calcOps.length; i++) {
-    calcOps[i].addEventListener("click", function(p) { pushToOutput(p.currentTarget.title); });
-}
+calcNums.forEach(num => {
+    num.addEventListener("click", (p) => pushToOutput(p.currentTarget.innerText));
+});
 
-document.getElementById('equals').addEventListener("click", function() { calculate(); });
-document.getElementById('reset').addEventListener("click", function() { reset(); });
+calcOps.forEach(op => {
+    op.addEventListener("click", (p) => pushToOutput(p.currentTarget.title));
+});
+
+equalsBtn.addEventListener("click", calculate);
+resetBtn.addEventListener("click", reset);
 
 function pushToOutput(value) {
-    document.getElementById("output").innerText += value;
+    const output = document.getElementById("output");
+    output.innerText += value;
 }
 
 function calculate() {
-    var output = document.getElementById("output");
-    output.innerText = eval(output.innerText);
+    const output = document.getElementById("output");
+    try {
+        output.innerText = eval(output.innerText);
+    }
+    catch (e) {
+        output.innerText = 'Invalid input';
+    }
 }
 
 function reset() {
-    document.getElementById("output").innerText = "";
+    const output = document.getElementById("output");
+    output.innerText = "";
 }
