@@ -17,7 +17,7 @@ function pushToOutput(value) {
 
 function calculate() {
     var output = document.getElementById("output");
-    output.innerText = "Not Implemented";
+    output.innerText = eval(output.innerText);
 }
 
 function reset() {
